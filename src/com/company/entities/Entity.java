@@ -1,6 +1,6 @@
 package com.company.entities;
 
-import com.company.Detailable;
+import com.company.Detailed;
 
-public abstract class Entity implements Detailable {
+public abstract class Entity implements Detailed {
 }

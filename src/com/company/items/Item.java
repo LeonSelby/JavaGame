@@ -1,7 +1,7 @@
 package com.company.items;
 
-import com.company.Detailable;
+import com.company.Detailed;
 
-public abstract class Item implements Detailable{
+public abstract class Item implements Detailed{
 
 }
