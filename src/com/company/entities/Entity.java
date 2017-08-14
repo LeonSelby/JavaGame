@@ -14,6 +14,12 @@ public abstract class Entity implements Detailed {
     public void printDescription(){}
 
 
+    //Constructor
+
+    public Entity(String name) {
+        this.name = name;
+    }
+
     //Getters and Setters
 
     public String getName() {

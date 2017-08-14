@@ -18,15 +18,15 @@ public class Inventory {
     private int capacity = 20;
     private int coinsInBag;
 
-    private List<Item> listOfArmour = new ArrayList<>(this.getCapacity());
+    private List<Armour> listOfArmour = new ArrayList<>(this.getCapacity());
     private List<Weapon> listOfWeapons = new ArrayList<>(this.getCapacity());
     private List<Potion> listOfPotions = new ArrayList<>(this.getCapacity());
     private List<Scroll> listOfScrolls = new ArrayList<>(this.getCapacity());
     private List<List<Item>> inventoryList = new ArrayList<List<Item>>(4){{
-add(listOfWeapons);
-add(listOfArmour);
-add(listOfPotions);
-add(listOfScrolls);
+//add(listOfWeapons);
+//add(listOfArmour);
+//add(listOfPotions);
+//add(listOfScrolls);
     }};
 
     //Create Lists
@@ -42,18 +42,31 @@ add(listOfScrolls);
     } //Players start with 50coins and 1 HP Potion
 
     //Add and remove
-    public void removeFromInventory(Person person, Item item) {
-        for (List list : inventoryList){
-            for (Object it : list){
-                if(it.equals(item)){
-                    list.remove(item);
-                }
-            }
+//    public void removeFromInventory(Person person, Item item) {
+//        for (List list : inventoryList){
+//            for (Item it : list){
+//                if(it.equals(item)){
+//                    list.remove(item);
+//                }
+//            }
+//        }
+//    }
+
+    public void addArmourToInventory(Armour item){ {
+            this.listOfArmour.add(item);
         }
+    }
+    public void addWeaponToInventory(Weapon item){ {
+        this.listOfWeapons.add(item);
+    }
     }
 
 
     //Getters and Setters Simple
+
+    public List<List<Item>> getInventoryList() {
+        return this.inventoryList;
+    }
 
     public void addCoins(int amount) {
         this.coinsInBag = this.getCoinsInBag() - amount;
