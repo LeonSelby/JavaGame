@@ -9,6 +9,13 @@ public abstract class Entity implements Detailed {
     private boolean isDead = false;
 
 
+    public String description(){return null;}
+
+    public void printDescription(){}
+
+
+    //Getters and Setters
+
     public String getName() {
         return this.name;
     }
@@ -34,10 +41,10 @@ public abstract class Entity implements Detailed {
     }
 
     public boolean isDead() {
-        return isDead;
+        return this.isDead;
     }
 
     public void setDead(boolean dead) {
-        isDead = dead;
+        this.isDead = dead;
     }
 }
