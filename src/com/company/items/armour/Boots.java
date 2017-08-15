@@ -5,14 +5,13 @@ public class Boots extends Armour{
     private int trapProtection;
     private boolean negatesTraps = checkIfTrapsNegated();
 
-
-
-    public Boots(String name, int defRating, int trapProtection) {
-        super(name, defRating);
+    public Boots(String name, int coinValue, int defRating, int trapProtection) {
+        super(name, coinValue, defRating);
         this.trapProtection = trapProtection;
     }
 
-    //Methods
+
+//Methods
 
     public boolean checkIfTrapsNegated(){
         boolean ans = false;

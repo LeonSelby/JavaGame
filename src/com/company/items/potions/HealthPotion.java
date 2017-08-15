@@ -6,7 +6,7 @@ public class HealthPotion extends Potion {
 
 
     public HealthPotion( int recoveryAmount) {
-        super("Health Potion");
+        super("Health Potion", 20);
         this.recoveryAmount = recoveryAmount;
     }
 }

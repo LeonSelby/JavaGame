@@ -5,8 +5,8 @@ import com.company.items.Item;
 public abstract class Weapon extends Item {
     private int AtkRating;
 
-    public Weapon(String name, int atkRating) {
-        super(name);
+    public Weapon(String name, int coinValue, int atkRating) {
+        super(name, coinValue);
         AtkRating = atkRating;
     }
 

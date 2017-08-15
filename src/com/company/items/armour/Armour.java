@@ -6,8 +6,8 @@ public abstract class Armour extends Item {
     private int defRating;
 
 
-    public Armour(String name, int defRating) {
-        super(name);
+    public Armour(String name, int coinValue, int defRating) {
+        super(name, coinValue);
         this.defRating = defRating;
     }
 

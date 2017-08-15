@@ -5,9 +5,11 @@ import com.company.Detailed;
 public abstract class Item implements Detailed {
 
     private String name;
+    private int coinValue;
 
-    public Item(String name) {
+    public Item(String name, int coinValue) {
         this.name = name;
+        this.coinValue = coinValue;
     }
 
 

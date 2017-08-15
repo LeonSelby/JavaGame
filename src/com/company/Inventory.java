@@ -22,7 +22,7 @@ public class Inventory {
     private List<Weapon> listOfWeapons = new ArrayList<>(this.getCapacity());
     private List<Potion> listOfPotions = new ArrayList<>(this.getCapacity());
     private List<Scroll> listOfScrolls = new ArrayList<>(this.getCapacity());
-    private List<List<Item>> inventoryList = new ArrayList<List<Item>>(4){{
+    private List<List<Item>> inventoryList = new ArrayList<List<Item>>(4) {{
 //add(listOfWeapons);
 //add(listOfArmour);
 //add(listOfPotions);
@@ -52,15 +52,88 @@ public class Inventory {
 //        }
 //    }
 
-    public void addArmourToInventory(Armour item){ {
-            this.listOfArmour.add(item);
+
+    public boolean checkIfItemIsPresent(Item item) {
+        boolean tmp = false;
+        if (item instanceof Armour) {
+            for (Armour a : this.getListOfArmour()) {
+                if (a.equals(item)) {
+                    tmp = true;
+                }
+            }
+        } else if (item instanceof Weapon) {
+            for (Weapon a : this.getListOfWeapons()) {
+                if (a.equals(item)) {
+                    tmp = true;
+                }
+            }
+        } else if (item instanceof Potion) {
+            for (Potion a : this.getListOfPotions()) {
+                if (a.equals(item)) {
+                    tmp = true;
+                }
+            }
+        } else if (item instanceof Scroll) {
+            for (Scroll a : this.getListOfScrolls()) {
+                if (a.equals(item)) {
+                    tmp = true;
+                }
+            }
         }
-    }
-    public void addWeaponToInventory(Weapon item){ {
-        this.listOfWeapons.add(item);
-    }
+        return tmp;
     }
 
+    //Remove from Inventory
+
+    public void removeArmourFromInventory(Armour armour) {
+        try {
+            this.listOfArmour.remove(armour);
+        } catch (NullPointerException e) {
+            System.out.println("That item isn't present in this inventory.");
+        }
+    }
+
+    public void removeWeaponFromInventory(Weapon weapon) {
+        try {
+            this.listOfWeapons.remove(weapon);
+        } catch (NullPointerException e) {
+            System.out.println("That item isn't present in this inventory.");
+        }
+    }
+
+    public void removePotionFromInventory(Potion potion) {
+        try {
+            this.listOfPotions.remove(potion);
+        } catch (NullPointerException e) {
+            System.out.println("That item isn't present in this inventory.");
+        }
+    }
+
+    public void removeScrollFromInventory(Scroll scroll) {
+        try {
+            this.listOfScrolls.remove(scroll);
+        } catch (NullPointerException e) {
+            System.out.println("That item isn't present in this inventory.");
+        }
+    }
+
+    //Add to Inventory
+
+    public void addArmourToInventory(Armour item) {
+        this.listOfArmour.add(item);
+    }
+
+    public void addWeaponToInventory(Weapon item) {
+        this.listOfWeapons.add(item);
+    }
+
+    public void addPotionToInventory(Potion potion) {
+        this.listOfPotions.add(potion);
+    }
+
+    public void addScrollToInventory(Scroll scroll) {
+        this.listOfScrolls.add(scroll);
+    }
 
     //Getters and Setters Simple
 

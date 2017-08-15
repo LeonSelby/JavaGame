@@ -5,12 +5,11 @@ public class Helmet extends Armour {
     private int trapProtection;
     private boolean negatesTraps = checkIfTrapsNegated();
 
-
-
-    public Helmet(String name, int defRating, int trapProtection) {
-        super(name, defRating);
+    public Helmet(String name, int coinValue, int defRating, int trapProtection) {
+        super(name, coinValue, defRating);
         this.trapProtection = trapProtection;
     }
+
 
     //Methods
 
