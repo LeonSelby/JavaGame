@@ -2,10 +2,10 @@ package com.company.entities;
 
 import com.company.Inventory;
 
-public abstract class Person extends Entity {
+public abstract class Vendor extends Entity {
 private Inventory inventory;
 
-    public Person(String name) {
+    public Vendor(String name) {
         super(name);
     }
 

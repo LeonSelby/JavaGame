@@ -1,7 +1,7 @@
 package com.company;
 
-import com.company.entities.Person;
-import com.company.entities.people.Player;
+import com.company.entities.combatunit.Player;
+import com.company.entities.Vendor;
 import com.company.items.Item;
 import com.company.items.armour.Armour;
 import com.company.items.potions.HealthPotion;
@@ -31,7 +31,7 @@ public class Inventory {
 
     //Create Lists
 
-    public void populateShopKeepersLists(Person shopKeeper) {
+    public void populateShopKeepersLists(Vendor shopKeeper) {
 
     }
 

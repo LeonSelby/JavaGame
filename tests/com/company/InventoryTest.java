@@ -61,12 +61,17 @@ public class InventoryTest {
         Assert.assertTrue(player.getInventory().getListOfScrolls().contains(map));
 
 
+        player.getInventory().removeArmourFromInventory(helmetCloth);
+        player.getInventory().removeScrollFromInventory(map);
+        Assert.assertFalse(player.getInventory().getListOfScrolls().contains(map));
     }
-
 
     @Test
     public void checkIfItemIsPresent_Test() {
 
+        player.getInventory().addArmourToInventory(leggingsCloth);
+
+        Assert.assertTrue(testing.getListOfArmour().contains(leggingsCloth));
     }
 
 
