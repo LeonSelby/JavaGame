@@ -12,7 +12,6 @@ public class CombatUnit extends Entity
 //    private boolean canCrit = checkIfCanCrit();
 
 
-
     //Constructor
 
     public CombatUnit(String name, int level, int atkRatingBase, int defRatingBase) {
@@ -23,7 +22,6 @@ public class CombatUnit extends Entity
     }
 
 
-
     //Methods
 
     public void attack(){
@@ -31,6 +29,10 @@ public class CombatUnit extends Entity
     }
 
     public void loseHP(int hpToLose){
+
+    }
+
+    public void gainHP(int hoToGain){
 
     }
 
@@ -56,6 +58,10 @@ public class CombatUnit extends Entity
 
     public void dodge(){
 
+    }
+
+    public void levelUp() {
+        this.setLevel(this.getLevel() + 1);
     }
 
 
@@ -84,17 +90,9 @@ public class CombatUnit extends Entity
         this.level = level;
     }
 
-    public void levelUp() {
-        this.setLevel(this.getLevel() + 1);
-    }
 
-    public void setAtkRating(int atkRating) {
-        this.AtkRating = atkRating;
-    }
 
-    public void setDefRating(int defRating) {
-        this.DefRating = defRating;
-    }
+
 
 
 

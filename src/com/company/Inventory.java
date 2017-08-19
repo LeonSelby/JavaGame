@@ -9,9 +9,7 @@ import com.company.items.potions.Potion;
 import com.company.items.scrolls.Scroll;
 import com.company.items.weapons.Weapon;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Inventory {
@@ -135,6 +133,25 @@ public class Inventory {
         this.listOfScrolls.add(scroll);
     }
 
+
+    //Report Items
+
+    public String armourStats(Armour armour) {
+        return null;
+    }
+
+    public String weaponStats(Weapon weapon) {
+        return null;
+    }
+
+    public String potionStats(Potion potion) {
+        return null;
+    }
+
+    public String coinReport() {
+        return "You have " + this.getCoinsInBag() + " coin(s) in your bag!";
+    }
+
     //Getters and Setters Simple
 
     public List<List<Item>> getInventoryList() {
@@ -142,18 +159,20 @@ public class Inventory {
     }
 
     public void addCoins(int amount) {
-        this.coinsInBag = this.getCoinsInBag() - amount;
+        this.coinsInBag = this.getCoinsInBag() + amount;
     }
 
     public void removeCoins(int amount) {
-        int tmp = this.coinsInBag;
+        this.coinsInBag = this.getCoinsInBag() - amount;
+    }
 
-        if (amount <= tmp) {
-            this.coinsInBag = tmp - amount;
-        } else {
-            System.out.println("Can't spend that many coins.");
-        }
-    }   //Fix this, add to Give output
+    public boolean checkIfCanAfford(int needed){
+        return (this.getCoinsInBag()>=needed);
+    } //MIGHT NEED TO MOVE
+
+    public String notEnoughCoins() {
+        return "Can't spend that many coins!";
+    } //MIGHT NEED TO MOVE
 
     public List<Armour> getListOfArmour() {
         return this.listOfArmour;

@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.entities.people.Player;
+import com.company.entities.combatunit.Player;
 import com.company.items.armour.Boots;
 import com.company.items.armour.Breastplate;
 import com.company.items.armour.Helmet;
@@ -73,6 +73,15 @@ public class InventoryTest {
 
         Assert.assertTrue(testing.getListOfArmour().contains(leggingsCloth));
     }
+
+    @Test
+    public void reportStats_Test(){}
+
+    @Test
+    public void addAndRemoveCoins_Test(){}
+
+    @Test
+    public void search_Test(){}
 
 
 }
