@@ -53,7 +53,7 @@ public class Battle {
 
     //Methods
 
-    public Enemy determineEnemy() {
+    private Enemy determineEnemy() {
         return null;
     }
 
