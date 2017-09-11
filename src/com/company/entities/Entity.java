@@ -4,8 +4,8 @@ import com.company.Detailed;
 
 public abstract class Entity implements Detailed {
     private String name;
-    private int healthMax;
-    private int healthCurrent;
+    private int healthMax = 1;
+    private int healthCurrent = 1;
     private boolean isDead = false;
 
 

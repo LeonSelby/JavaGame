@@ -1,14 +1,30 @@
 package com.company.entities.combatunits;
 
+import com.company.entities.Entity;
+import com.company.entities.combatunit.CombatUnit;
+import com.company.entities.combatunit.Player;
+import com.company.items.Item;
+import com.company.items.potions.HealthPotion;
+import com.company.items.potions.Potion;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CombatUnitTest {
 
-@Before
-public void setUp(){
+    private Player player;
+    private HealthPotion potion;
 
-}
+    @BeforeClass
+    public static void beforeClass(){
+    }
+
+
+    @Before
+    public void setUp(){
+        player = new Player("Leon");
+        potion = new HealthPotion(50);
+    }
 
     @Test
     public void attack_Test(){
@@ -16,12 +32,24 @@ public void setUp(){
     }
 
     @Test
-    public void loseHP_Test(int hpToLose){
-
+    public void loseHP_Test(){
+        player.setHealthMax(100);
+        player.setHealthCurrent(60);
+        System.out.println(player.getHealthCurrent());
+        player.loseHP(10);
+        System.out.println(player.getHealthCurrent());
+        System.out.println(player.isDead());
     }
 
     @Test
-    public void gainHp_Test(int hpToGain){}
+    public void gainHp_Test(){
+        player.setHealthMax(100);
+        player.setHealthCurrent(50);
+        System.out.println(player.getHealthCurrent());
+        player.gainHP(10);
+        System.out.println(player.getHealthCurrent());
+        System.out.println(player.isDead());
+    }
 
     @Test
     public void die_Test(){
@@ -34,8 +62,8 @@ public void setUp(){
     }
 
     @Test
-    public boolean determineIfCrit_Test(){
-        return false;
+    public void determineIfCrit_Test(){
+
     }
 
     @Test
@@ -52,7 +80,4 @@ public void setUp(){
     public void dodge_Test(){
     }
 
-    @Test
-    public void levelUp_Test(){
-    }
 }

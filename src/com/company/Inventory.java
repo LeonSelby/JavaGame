@@ -39,17 +39,6 @@ public class Inventory {
         this.addCoins(50);
     } //Players start with 50coins and 1 HP Potion
 
-    //Add and remove
-//    public void removeFromInventory(Person person, Item item) {
-//        for (List list : inventoryList){
-//            for (Item it : list){
-//                if(it.equals(item)){
-//                    list.remove(item);
-//                }
-//            }
-//        }
-//    }
-
 
     public boolean checkIfItemIsPresent(Item item) {
         boolean tmp = false;
