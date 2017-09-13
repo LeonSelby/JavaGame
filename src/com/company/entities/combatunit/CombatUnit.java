@@ -2,12 +2,15 @@ package com.company.entities.combatunit;
 
 import com.company.entities.Entity;
 
+import java.util.Random;
+
 public class CombatUnit extends Entity {
     private int level = 1;
     private int AtkRatingBase = 1;
     private int DefRatingBase = 1;
-    private int DefRating;
-    private int AtkRating;
+    private int defRating;
+    private int atkRating;
+    private boolean inCombat = false;
 //    private boolean canCrit = checkIfCanCrit();
 
 
@@ -18,13 +21,26 @@ public class CombatUnit extends Entity {
         this.level = level;
         this.AtkRatingBase = atkRatingBase;
         this.DefRatingBase = defRatingBase;
-    }
 
+    }
 
     //Methods
 
-    public void attack(){
-
+    public void attack(CombatUnit target){
+        int attackersAtkRating = this.getAtkRating();
+        int defendersDefRating = target.getDefRating();
+        if(this.determineIfCrit()){
+            System.out.println("CRIT!");
+            attackersAtkRating += attackersAtkRating;
+        }else if(target.dodge()){
+            System.out.println("DODGED!");
+            attackersAtkRating = 0;
+        }else if(this.block()){
+            System.out.println("BLOCKED!");
+            defendersDefRating = defendersDefRating + (defendersDefRating/2);
+        }
+        int damage = attackersAtkRating - defendersDefRating;
+        target.loseHP(damage);
     }
 
     public void loseHP(int hpToLose){
@@ -59,23 +75,32 @@ public class CombatUnit extends Entity {
     }
 
     public void flee(){
-
+        Random random = new Random();
+        int n = random.nextInt(20) + 1;
+        if(n != 20) {
+            this.setInCombat(false);
+        }else{
+            System.out.println("Flee failed!");
+        }
     }
 
     public boolean determineIfCrit(){
-        return false;
+        Random random = new Random();
+        int n = random.nextInt(20) + 1;
+        return n == 20;
     }
 
-    public void crit(){
 
+    public boolean block(){
+        Random random = new Random();
+        int n = random.nextInt(20) + 1;
+        return n > 17;
     }
 
-    public void block(){
-
-    }
-
-    public void dodge(){
-
+    public boolean dodge(){
+        Random random = new Random();
+        int n = random.nextInt(20) + 1;
+        return n == 20;
     }
 
     public void levelUp() {
@@ -108,12 +133,26 @@ public class CombatUnit extends Entity {
         this.level = level;
     }
 
+    public int getDefRating() {
+        return this.getDefRatingBase()+this.defRating;
+    }
 
+    public void setDefRating(int defRating) {
+        this.defRating = defRating;
+    }
 
+    public int getAtkRating() {
+        return this.getAtkRatingBase()+this.atkRating;
+    }
 
+    public void setAtkRating(int atkRating) {
+        this.atkRating = atkRating;
+    }
+    public boolean isInCombat() {
+        return this.inCombat;
+    }
 
-
-
-
-
+    public void setInCombat(boolean inCombat) {
+        this.inCombat = inCombat;
+    }
 }

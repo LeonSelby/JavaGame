@@ -18,14 +18,8 @@ public class Inventory {
 
     private List<Armour> listOfArmour = new ArrayList<>(this.getCapacity());
     private List<Weapon> listOfWeapons = new ArrayList<>(this.getCapacity());
-    private List<Potion> listOfPotions = new ArrayList<>(this.getCapacity());
+    private List<HealthPotion> listOfPotions = new ArrayList<>(this.getCapacity());
     private List<Scroll> listOfScrolls = new ArrayList<>(this.getCapacity());
-    private List<List<Item>> inventoryList = new ArrayList<List<Item>>(4) {{
-//add(listOfWeapons);
-//add(listOfArmour);
-//add(listOfPotions);
-//add(listOfScrolls);
-    }};
 
     //Create Lists
 
@@ -34,7 +28,7 @@ public class Inventory {
     }
 
     public void populatePlayersInventory(Player player) {
-        Potion hpPot = new HealthPotion(10);
+        HealthPotion hpPot = new HealthPotion(10);
         this.listOfPotions.add(hpPot);
         this.addCoins(50);
     } //Players start with 50coins and 1 HP Potion
@@ -71,6 +65,17 @@ public class Inventory {
     }
 
     //Remove from Inventory
+
+    public void removeItemFromInventory(Item item){
+        if(item instanceof Armour){
+            removeArmourFromInventory((Armour)item);
+        }else if(item instanceof Weapon){
+            removeWeaponFromInventory((Weapon)item);
+        }else if(item instanceof Potion){
+            removePotionFromInventory((Potion)item);
+        }else if(item instanceof Scroll){
+            removeScrollFromInventory((Scroll)item);        }
+    }
 
     public void removeArmourFromInventory(Armour armour) {
         try {
@@ -114,7 +119,7 @@ public class Inventory {
         this.listOfWeapons.add(item);
     }
 
-    public void addPotionToInventory(Potion potion) {
+    public void addPotionToInventory(HealthPotion potion) {
         this.listOfPotions.add(potion);
     }
 
@@ -122,6 +127,17 @@ public class Inventory {
         this.listOfScrolls.add(scroll);
     }
 
+    public void addItemToInventory(Item item) {
+        if (item instanceof Armour) {
+            addArmourToInventory((Armour) item);
+        } else if (item instanceof Weapon) {
+            addWeaponToInventory((Weapon) item);
+        } else if (item instanceof Potion) {
+            addPotionToInventory((HealthPotion) item);
+        } else if (item instanceof Scroll) {
+            addScrollToInventory((Scroll) item);
+        }
+    }
 
     //Report Items
 
@@ -143,10 +159,6 @@ public class Inventory {
 
     //Getters and Setters Simple
 
-    public List<List<Item>> getInventoryList() {
-        return this.inventoryList;
-    }
-
     public void addCoins(int amount) {
         this.coinsInBag = this.getCoinsInBag() + amount;
     }
@@ -157,7 +169,12 @@ public class Inventory {
 
     public boolean checkIfCanAfford(int needed){
         return (this.getCoinsInBag()>=needed);
-    } //MIGHT NEED TO MOVE
+    }
+
+    public boolean checkIfCanAfford(Item item){
+        int needed = item.getCoinValue();
+        return checkIfCanAfford(needed);
+    }
 
     public String notEnoughCoins() {
         return "Can't spend that many coins!";
@@ -171,7 +188,7 @@ public class Inventory {
         return this.listOfWeapons;
     }
 
-    public List<Potion> getListOfPotions() {
+    public List<HealthPotion> getListOfPotions() {
         return this.listOfPotions;
     }
 

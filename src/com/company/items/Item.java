@@ -23,6 +23,14 @@ public abstract class Item implements Detailed {
         this.name = name;
     }
 
+    public int getCoinValue() {
+        return this.coinValue;
+    }
+
+    public void setCoinValue(int coinValue) {
+        this.coinValue = coinValue;
+    }
+
     //Detailed
     public String description() {
         return null;

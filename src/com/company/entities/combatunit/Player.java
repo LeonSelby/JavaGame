@@ -5,6 +5,7 @@ import com.company.Inventory;
 import com.company.entities.combatunit.CombatUnit;
 import com.company.items.Item;
 import com.company.items.armour.Armour;
+import com.company.items.armour.Helmet;
 import com.company.items.potions.HealthPotion;
 import com.company.items.potions.Potion;
 import com.company.items.scrolls.*;
@@ -24,6 +25,8 @@ public class Player extends CombatUnit {
     //Constructor
     public Player(String name) {
         super(name, 1, 1, 1);
+        this.setHealthMax(75);
+        this.setHealthCurrent(75);
     }
 
     //Methods
@@ -32,16 +35,52 @@ public class Player extends CombatUnit {
 
     }
 
-    //May need to make 3 sets more
     public void buy(Item item) {
-
+        if (this.getInventory().checkIfCanAfford(item)){
+            this.getInventory().addItemToInventory(item);
+            this.getInventory().removeCoins(item.getCoinValue());
+        }else{
+            System.out.println("You don't have enough coins to buy this item!");
+        }
     }
 
-    public void sell(Item item){}
+    public void sell(Item item){
+        if(this.getInventory().checkIfItemIsPresent(item)){
+            this.getInventory().removeItemFromInventory(item);
+            this.getInventory().addCoins(item.getCoinValue());
+        }else{
+            System.out.println("You can't sell an item you don't have in your Inventory!");
+        }
+    }
 
-    public void equip(Armour armour){}
+    public void equip(Armour armour){
+        if(!this.getInventory().getListOfArmour().contains(armour)){
+            System.out.println("You can't equip armour you don't own!");
+        }else {
+            if (this.getEquippedArmour().isEmpty()) {
+                this.getEquippedArmour().add(armour);
+            } else {
+                Armour temp = null;
+                for (Armour a : this.getEquippedArmour()) {
+                    if (a.getClass() == armour.getClass()) {
+                        temp = a;
+                    }
+                }
+                this.unequip(temp);
+                this.getEquippedArmour().add(armour);
+                this.getInventory().getListOfArmour().remove(armour);
+            }
+        }
+    }
 
-    public void unequip(Armour armour){}
+    public void unequip(Armour armour){
+        if(!this.getEquippedArmour().contains(armour)){
+            System.out.println("You can't unequip armour you're not wearing!");
+        }else{
+            this.getInventory().getListOfArmour().add(armour);
+            this.getEquippedArmour().remove(armour);
+        }
+    }
 
     public void wield(Weapon weapon){
         if(!this.getInventory().getListOfWeapons().contains(weapon)){
@@ -68,10 +107,11 @@ public class Player extends CombatUnit {
         }
     }
 
-    public void takeHpPotion(HealthPotion potion) {
-        if (!this.getInventory().getListOfPotions().contains(potion)) {
+    public void takeHpPotion() {
+        if (this.getInventory().getListOfPotions().isEmpty()) {
             System.out.println("You have no potions!");
         } else {
+            HealthPotion potion = this.getInventory().getListOfPotions().get(0);
             this.gainHP(potion.getRecoveryAmount());
             this.getInventory().removePotionFromInventory(potion);
         }
@@ -88,6 +128,7 @@ public class Player extends CombatUnit {
     }
 
     //TEST THESE
+    @Override
     public int getAtkRating() {
         int rating = getAtkRatingBase();
         for (Weapon w : this.equippedWeapon) {
@@ -96,6 +137,7 @@ public class Player extends CombatUnit {
         return rating;
     }
 
+    @Override
     public int getDefRating() {
         int rating = getDefRatingBase();
         for (Armour a : this.equippedArmour) {
@@ -127,4 +169,6 @@ public class Player extends CombatUnit {
     public void setEquippedWeapon(List<Weapon> equipedWeapon) {
         this.equippedWeapon = equipedWeapon;
     }
+
+
 }
