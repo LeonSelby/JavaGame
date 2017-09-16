@@ -127,7 +127,6 @@ public class Player extends CombatUnit {
         this.experiencePoints = experiencePoints;
     }
 
-    //TEST THESE
     @Override
     public int getAtkRating() {
         int rating = getAtkRatingBase();

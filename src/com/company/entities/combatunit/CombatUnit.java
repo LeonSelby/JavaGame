@@ -26,6 +26,10 @@ public class CombatUnit extends Entity {
 
     //Methods
 
+    public String declareDMG(int dmg, CombatUnit target){
+        return target.getName() + " has taken " + dmg + " damage!";
+    }
+
     public void attack(CombatUnit target){
         int attackersAtkRating = this.getAtkRating();
         int defendersDefRating = target.getDefRating();
@@ -41,6 +45,7 @@ public class CombatUnit extends Entity {
         }
         int damage = attackersAtkRating - defendersDefRating;
         target.loseHP(damage);
+        System.out.println(declareDMG(damage, target));
     }
 
     public void loseHP(int hpToLose){

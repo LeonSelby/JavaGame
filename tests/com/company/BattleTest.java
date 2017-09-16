@@ -1,20 +1,11 @@
 package com.company;
 
-import com.company.entities.combatunit.Enemy;
 import com.company.entities.combatunit.Player;
 import com.company.entities.combatunit.enemies.*;
-import com.company.items.Item;
-import com.company.items.armour.Boots;
-import com.company.items.armour.Breastplate;
-import com.company.items.armour.Helmet;
-import com.company.items.armour.Leggings;
 import com.company.items.potions.HealthPotion;
 import com.company.items.weapons.Sword;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Random;
 
 public class BattleTest {
 
@@ -58,7 +49,7 @@ public class BattleTest {
     @Test
     public void awardLoot_Test(){
         System.out.println(player.getInventory().getCoinsInBag());
-        battle.awardLoot(player);
+        battle.awardLoot();
         System.out.println(player.getInventory().getCoinsInBag());
     }
 

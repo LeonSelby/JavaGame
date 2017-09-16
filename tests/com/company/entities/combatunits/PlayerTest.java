@@ -1,6 +1,5 @@
 package com.company.entities.combatunits;
 
-import com.company.Inventory;
 import com.company.entities.combatunit.Player;
 import com.company.items.armour.Boots;
 import com.company.items.armour.Breastplate;
@@ -8,7 +7,6 @@ import com.company.items.armour.Helmet;
 import com.company.items.armour.Leggings;
 import com.company.items.potions.HealthPotion;
 import com.company.items.scrolls.Map;
-import com.company.items.scrolls.Scroll;
 import com.company.items.weapons.Sword;
 import com.company.items.weapons.Weapon;
 import org.junit.Assert;

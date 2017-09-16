@@ -31,15 +31,19 @@ public class Battle {
     //Strings
 
     public String declareEnemy() {
-        return this.getEnemy().toString();
+        return this.getEnemy().getName();
     }
 
     public String introString() {
-        return null;
+        return declareEnemy() + " has appeared!";
     }
 
-    public String winnerString() {
-        return null;
+    public String winnerString(CombatUnit input) {
+        return input.getName() + " has won this battle!";
+    }
+
+    public String fleeSuccess(){
+        return "Flee Successful!";
     }
 
     public String expString() {
@@ -54,8 +58,21 @@ public class Battle {
         return combatUnit.getName() + " has lost " + hpToLose + " HP!";
     }
 
+    public String hpDeclarations(){
+        return player.getName() + " has " + player.getHealthCurrent() + "HP left, and " + enemy.getName()
+                + " has "+ enemy.getHealthCurrent() + "HP left.";
+    }
+
     public String declareLoot(Item loot){
         return loot.getName()+" has dropped!";
+    }
+
+    public String declareCoins(int coinsReward){
+        return coinsReward + " coins have dropped!";
+    }
+
+    public String declareEXP(int exp){
+        return player.getName() + " has gained " + exp + " experience points!";
     }
 
     public String optionsString(){
@@ -132,17 +149,21 @@ public class Battle {
     }
 
     public void turn(CombatUnit combatUnit) {
-        int ans = offerOptions();
-        switch (ans){
-            case 1:
-                player.attack(this.getEnemy());
-                break;
-            case 2:
-                player.takeHpPotion();
-                break;
-            case 3:
-                player.flee();
-                break;
+        if(combatUnit instanceof Player){
+            int ans = offerOptions();
+            switch (ans) {
+                case 1:
+                    player.attack(this.getEnemy());
+                    break;
+                case 2:
+                    player.takeHpPotion();
+                    break;
+                case 3:
+                    player.flee();
+                    break;
+            }
+        }else{
+            enemy.attack(player);
         }
     }
 
@@ -210,52 +231,65 @@ public class Battle {
         return temp;
     }
 
-    public void awardLoot(Player player){
-        Random random = new Random();
-        int o = random.nextInt(3) + 1;
-        if(o>1){
-            Item loot = determineLoot();
-            player.getInventory().addItemToInventory(loot);
-        }else{
-            int coinsReward = random.nextInt(30) + 20;
-            HealthPotion potion = new HealthPotion(50);
-            player.getInventory().addItemToInventory(potion);
-            player.getInventory().addCoins(coinsReward);
+    public void awardLoot() {
+        if (enemy.isDead()) {
+            Random random = new Random();
+            int o = random.nextInt(3) + 1;
+            if (o > 1) {
+                Item loot = determineLoot();
+                player.getInventory().addItemToInventory(loot);
+                System.out.println(declareLoot(loot));
+            } else {
+                int coinsReward = random.nextInt(30) + 20;
+                HealthPotion potion = new HealthPotion(50);
+                player.getInventory().addItemToInventory(potion);
+                player.getInventory().addCoins(coinsReward);
+                System.out.println(declareCoins(coinsReward));
+            }
         }
     }
 
-    public int determineEXP(){
-        int exp;
-        int enemyHealthMax = enemy.getHealthMax();
-        if(enemyHealthMax < 20){
-            exp = 10;
-        }else if(enemyHealthMax < 30){
-            exp = 15;
-        }else if(enemyHealthMax < 60){
-            exp = 20;
-        }else if(enemyHealthMax < 80){
-            exp = 25;
-        }else if(enemyHealthMax < 100){
-            exp = 30;
-        }else{
-            exp = 50;
+    private int determineEXP(){
+        int exp = 0;
+        if(enemy.isDead()) {
+            int enemyHealthMax = enemy.getHealthMax();
+            if (enemyHealthMax < 20) {
+                exp = 10;
+            } else if (enemyHealthMax < 30) {
+                exp = 15;
+            } else if (enemyHealthMax < 60) {
+                exp = 20;
+            } else if (enemyHealthMax < 80) {
+                exp = 25;
+            } else if (enemyHealthMax < 100) {
+                exp = 30;
+            } else {
+                exp = 50;
+            }
         }
         return exp;
     }
 
     public void awardEXP(){
         int exp = determineEXP();
+        System.out.println(declareEXP(exp));
         player.setExperiencePoints(player.getExperiencePoints()+ exp);
     }
 
-    public void endGame(){
-
-    }
+    public void endGame(){}
 
     public int offerOptions(){
         return TakeInput.requestInputInRange(this.optionsString(), 1, 3);
     }
 
+    public CombatUnit determineWinner(){
+        if(enemy.isDead()){
+            return player;
+        }else if(player.isDead()){
+            return enemy;
+        }
+        return null;
+    }
 
 
     //Getters and Setters
