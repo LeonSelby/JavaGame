@@ -2,6 +2,7 @@ package com.company.entities.combatunit;
 
 import com.company.Direction;
 import com.company.Inventory;
+import com.company.TakeInput;
 import com.company.entities.combatunit.CombatUnit;
 import com.company.items.Item;
 import com.company.items.armour.Armour;
@@ -10,10 +11,14 @@ import com.company.items.potions.HealthPotion;
 import com.company.items.potions.Potion;
 import com.company.items.scrolls.*;
 import com.company.items.weapons.Weapon;
+import sun.text.CodePointIterator;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.company.Direction.*;
 
 public class Player extends CombatUnit {
 
@@ -21,18 +26,33 @@ public class Player extends CombatUnit {
     private Inventory inventory = new Inventory();
     private List<Armour> equippedArmour = new ArrayList<Armour>(4);
     private List<Weapon> equippedWeapon = new LinkedList<Weapon>();
+    private Point location;
+    private Point prevLocation;
 
     //Constructor
     public Player(String name) {
         super(name, 1, 1, 1);
         this.setHealthMax(75);
         this.setHealthCurrent(75);
+        this.location = new Point(10, 1);
+        this.prevLocation = new Point(10, 1);
     }
 
     //Methods
 
-    public void move(Direction direction) {
-
+    public Point attemptMove() {
+        Direction dir = TakeInput.requestMovementDirection(movementQuestion());
+        Point attemptedDest = null;
+        if (dir == Dir_NORTH){
+            attemptedDest = new Point(this.location.x - 1, this.location.y);
+        }else if(dir == Dir_EAST){
+            attemptedDest = new Point(this.location.x, this.location.y + 1);
+        }else if(dir == Dir_SOUTH){
+            attemptedDest = new Point(this.location.x + 1, this.location.y);
+        }else if(dir == Dir_WEST){
+            attemptedDest = new Point(this.location.x, this.location.y - 1);
+        }
+        return attemptedDest;
     }
 
     public void buy(Item item) {
@@ -169,5 +189,25 @@ public class Player extends CombatUnit {
         this.equippedWeapon = equipedWeapon;
     }
 
+    public Point getLocation() {
+        return this.location;
+    }
+
+    public void setLocation(Point location) {
+        this.location = location;
+    }
+
+    public Point getPrevLocation() {
+        return this.prevLocation;
+    }
+
+    public void setPrevLocation(Point prevLocation) {
+        this.prevLocation = prevLocation;
+    }
+
+
+    public String movementQuestion(){
+        return "Which direction would you like to move?";
+    }
 
 }

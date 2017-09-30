@@ -3,6 +3,8 @@ package com.company;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static com.company.Direction.*;
+
 public class TakeInput {
     static public Scanner sc = new Scanner(System.in);
 
@@ -49,7 +51,6 @@ public class TakeInput {
         return tmp;
     }
 
-
     static public int requestInput(String question) {
         System.out.println(question);
         int ans = takeNextInt();
@@ -66,6 +67,42 @@ public class TakeInput {
         System.out.println(question);
         int ans = takeNextIntInRange(0, max);
         return ans;
+    }
+
+    static private String requestWASD(){
+        boolean badInput = true;
+        String tmp = "";
+        while (badInput) {
+            try {
+                tmp = takeNextLine().toLowerCase();
+            } catch (InputMismatchException var3) {
+                needIntPlease();
+            } catch (NumberFormatException var4) {
+                needIntPlease();
+            }
+            if((!tmp.equals("w")) && !tmp.equals("s") && !tmp.equals("d") && !tmp.equals("a")){
+                needWASD();
+            }else{
+                badInput= false;
+            }
+        }
+        return tmp;
+    }
+
+    static public Direction requestMovementDirection(String question){
+        Direction answer = null;
+        System.out.println(question);
+        String ans = requestWASD();
+        if(ans.equalsIgnoreCase("w")){
+            answer = Dir_NORTH;
+        }else if( ans.equalsIgnoreCase("s")){
+            answer = Dir_SOUTH;
+        }else if( ans.equalsIgnoreCase("d")){
+            answer = Dir_EAST;
+        }else if( ans.equalsIgnoreCase("a")){
+            answer = Dir_WEST;
+        }
+        return answer;
     }
 
     static public boolean requestYesOrNo(String question) {
@@ -108,4 +145,8 @@ public class TakeInput {
     static public void needYesOrNo() {
         System.out.println("We're sorry! Please enter yes or no, y or n is accepted also.");
     }
+    static public void needWASD() {
+        System.out.println("We're sorry! Please enter W, A, S, or D!");
+    }
+
 }
