@@ -137,7 +137,9 @@ public class Player extends CombatUnit {
         }
     }
 
-
+public void reportStatistics(){
+    System.out.println("Need to add Stats reporting!");
+}
     //Getters and Setters
     public int getExperiencePoints() {
         return this.experiencePoints;

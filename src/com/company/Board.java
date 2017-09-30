@@ -101,6 +101,8 @@ public class Board {
                     System.out.print(" " + "M");
                 } else if (boardArray[r][c] == 7) {
                     System.out.print(" " + " ");
+                }else if(boardArray[r][c] == 9){
+                    System.out.print(" " + " ");
                 } else if (boardArray[r][c] == 10) {
                     System.out.print(" " + "M");
                 }
@@ -134,6 +136,8 @@ public class Board {
                     System.out.print(" " + "+");
                 } else if (boardArray[r][c] == 7) {
                     System.out.print(" " + " ");
+                }else if(boardArray[r][c] == 9){
+                    System.out.print(" " + " ");
                 } else if (boardArray[r][c] == 10) {
                     System.out.print(" " + "R");
                 }
@@ -149,5 +153,9 @@ public class Board {
 
     public int[][] getBoardArray() {
         return this.boardArray;
+    }
+
+    public int[][] getPureBoard() {
+        return pureBoard;
     }
 }

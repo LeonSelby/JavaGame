@@ -140,6 +140,9 @@ public class Inventory {
     }
 
     //Report Items
+    public void open(){
+        System.out.println("Need to do Open functionality!");
+    }
 
     public String armourStats(Armour armour) {
         return null;
