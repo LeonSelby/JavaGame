@@ -153,6 +153,7 @@ public class CombatUnit extends Entity {
     public void setAtkRating(int atkRating) {
         this.atkRating = atkRating;
     }
+
     public boolean isInCombat() {
         return this.inCombat;
     }

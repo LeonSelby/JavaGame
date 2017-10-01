@@ -49,7 +49,6 @@ public class Game {
         int targetTile = board.getBoardArray()[targetLoc.x][targetLoc.y];
         String tile = determineTargetTile(targetTile);
         if (gameUtils.getListOfUnMoveableTiles().contains(targetTile)){
-
             System.out.println("Can't move here.");
             if(gameUtils.getListofInteractableTiles().contains(targetTile)){
                 boolean ans = TakeInput.requestYesOrNo

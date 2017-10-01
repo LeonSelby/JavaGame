@@ -20,9 +20,7 @@ public class TakeInput {
             try {
                 tmp = Integer.parseInt(sc.nextLine());
                 badInput = false;
-            } catch (InputMismatchException var3) {
-                needIntPlease();
-            } catch (NumberFormatException var4) {
+            } catch (InputMismatchException | NumberFormatException var3) {
                 needIntPlease();
             }
         }

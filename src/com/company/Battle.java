@@ -50,10 +50,6 @@ public class Battle {
         return null;
     }
 
-    public String leveledUpString() {
-        return null;
-    }
-
     public String declareHPLoss(CombatUnit combatUnit, int hpToLose) {
         return combatUnit.getName() + " has lost " + hpToLose + " HP!";
     }
